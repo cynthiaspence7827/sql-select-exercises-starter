@@ -31,6 +31,7 @@
 */
 
 -- your query here
+SELECT city, state, population_estimate_2018 FROM cities;
 
 \echo ========= Problem 2.2 ====================================================
 \echo
@@ -40,6 +41,7 @@
 */
 
 -- your query here
+SELECT name FROM airports;
 
 ---- Phase 3: Add WHERE clauses ------------------------------------------------
 -- Select specific rows from a table using WHERE and common operators.
@@ -52,6 +54,7 @@
 */
 
 -- your query here
+SELECT population_estimate_2018 FROM cities WHERE city = 'San Diego';
 
 \echo ========= Problem 3.2 ====================================================
 \echo
@@ -62,6 +65,7 @@
 */
 
  -- your query here
+ SELECT city, state, population_estimate_2018 FROM cities WHERE city = 'Phoenix' OR city = 'Jacksonville' OR city = 'Charlotte' OR city = 'Nashville';
 
 \echo ========= Problem 3.3 ====================================================
 \echo
@@ -72,6 +76,7 @@
 */
 
 -- your query here
+SELECT city, state, population_estimate_2018 FROM cities WHERE population_estimate_2018 BETWEEN 800000 AND 900000;
 
 \echo ========= Problem 3.4 ====================================================
 \echo
@@ -82,6 +87,7 @@
 */
 
 -- your query here
+SELECT city FROM cities WHERE population_estimate_2018 >= 1000000;
 
 \echo ========= Problem 3.5 ====================================================
 \echo
@@ -92,6 +98,7 @@
 */
 
 -- your query here
+SELECT city, (population_estimate_2018 / 1000000) FROM cities WHERE state = 'Texas';
 
 \echo ========= Problem 3.6 ====================================================
 \echo
@@ -105,6 +112,8 @@
 */
 
 -- your query here
+SELECT city, population_estimate_2018 FROM cities WHERE state = 'Texas';
+SELECT city, state, population_estimate_2018 FROM cities WHERE NOT state = 'New York' AND NOT state = 'California' AND NOT state = 'Texas';
 
 \echo ========= Problem 3.7 ====================================================
 \echo
@@ -116,6 +125,7 @@
 */
 
 -- your query here
+SELECT city, state, population_estimate_2018 FROM cities WHERE city LIKE 'S%';
 
 \echo ========= Problem 3.8 ====================================================
 \echo
@@ -127,6 +137,8 @@
 */
 
 -- your query here
+SELECT city, land_area_sq_mi_2016, population_estimate_2018 FROM cities
+WHERE land_area_sq_mi_2016 > 400 OR population_estimate_2018 > 2000000;
 
 \echo ========= Problem 3.9 ====================================================
 \echo
@@ -138,6 +150,9 @@
 */
 
 -- your query here
+SELECT city, land_area_sq_mi_2016, population_estimate_2018 FROM cities
+WHERE (land_area_sq_mi_2016 > 400 AND NOT population_estimate_2018 > 2000000)
+OR (NOT land_area_sq_mi_2016 > 400 AND population_estimate_2018);
 
 \echo ========= Problem 3.10 ===================================================
 \echo
@@ -149,6 +164,8 @@
 */
 
 -- your query here
+SELECT city, population_estimate_2018, population_census_2010 FROM cities
+WHERE (population_estimate_2018 - population_census_2010) > 200000;
 
 ---- Phase 4: Use a JOIN operation ---------------------------------------------
 -- Retrieve rows from multiple tables joining on a foreign key.
@@ -164,6 +181,8 @@
 */
 
 -- your query here
+SELECT airports.name, cities.city FROM airports
+INNER JOIN cities ON city_id = cities.id;
 
 \echo ========= Problem 4.2 ====================================================
 \echo
@@ -176,6 +195,10 @@
 */
 
 -- your query here
+SELECT COUNT(*) FROM airports
+INNER JOIN cities ON (airports.city_id = cities.id)
+WHERE city = 'New York';
+
 
 --------------------------------------------------------------------------------
 ---- Bonuses:
